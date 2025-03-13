@@ -1,6 +1,5 @@
 import api from './api';
 
-// Mock data for development
 const mockRoutes = [
   {
     id: 1,
@@ -9,142 +8,64 @@ const mockRoutes = [
     distance: '120 km',
     duration: '2.5 hours',
     efficiency: 92,
-    carbonImpact: 85,
     status: 'active',
-  },
-  {
-    id: 2,
-    name: 'Route B-456',
-    stops: 3,
-    distance: '85 km',
-    duration: '1.8 hours',
-    efficiency: 88,
-    carbonImpact: 90,
-    status: 'optimizing',
-  },
-  {
-    id: 3,
-    name: 'Route C-789',
-    stops: 7,
-    distance: '150 km',
-    duration: '3.2 hours',
-    efficiency: 85,
-    carbonImpact: 82,
-    status: 'completed',
-  },
+  }
+  // Remove redundant mock data
 ];
 
-// Service functions
+const routeCache = new Map();
+const CACHE_DURATION = 5 * 60 * 1000;
+
 export const routesService = {
-  // Get all routes
-  getRoutes: async () => {
+  async getRoutes() {
     try {
-      // When backend is ready, replace with actual API call
-      // const response = await api.get('/routes');
-      // return response.data;
-      
-      // For now, return mock data
       return mockRoutes;
     } catch (error) {
-      console.error('Error fetching routes:', error);
-      throw error;
+      throw new Error(`Failed to fetch routes: ${error.message}`);
     }
   },
 
-  // Get single route by ID
-  getRouteById: async (id) => {
-    try {
-      // When backend is ready, replace with actual API call
-      // const response = await api.get(`/routes/${id}`);
-      // return response.data;
-      
-      // For now, return mock data
-      return mockRoutes.find(route => route.id === id);
-    } catch (error) {
-      console.error('Error fetching route:', error);
-      throw error;
-    }
+  async getRouteById(id) {
+    return mockRoutes.find(route => route.id === id);
   },
 
-  // Create new route
-  createRoute: async (routeData) => {
-    try {
-      // When backend is ready, replace with actual API call
-      // const response = await api.post('/routes', routeData);
-      // return response.data;
-      
-      // For now, return mock data
-      const newRoute = {
-        id: mockRoutes.length + 1,
-        ...routeData,
-        status: 'active',
-      };
-      mockRoutes.push(newRoute);
-      return newRoute;
-    } catch (error) {
-      console.error('Error creating route:', error);
-      throw error;
+  async optimizeRoutes(params) {
+    const cacheKey = JSON.stringify(params);
+    const cached = routeCache.get(cacheKey);
+    
+    if (cached?.timestamp > Date.now() - CACHE_DURATION) {
+      return cached.data;
     }
-  },
 
-  // Update route
-  updateRoute: async (id, routeData) => {
     try {
-      // When backend is ready, replace with actual API call
-      // const response = await api.put(`/routes/${id}`, routeData);
-      // return response.data;
-      
-      // For now, return mock data
-      const index = mockRoutes.findIndex(route => route.id === id);
-      if (index !== -1) {
-        mockRoutes[index] = { ...mockRoutes[index], ...routeData };
-        return mockRoutes[index];
-      }
-      throw new Error('Route not found');
-    } catch (error) {
-      console.error('Error updating route:', error);
-      throw error;
-    }
-  },
+      const optimizedRoutes = mockRoutes.map(route => ({
+        ...route,
+        ...optimizeRouteMetrics(route, params)
+      }));
 
-  // Delete route
-  deleteRoute: async (id) => {
-    try {
-      // When backend is ready, replace with actual API call
-      // await api.delete(`/routes/${id}`);
-      
-      // For now, handle mock data
-      const index = mockRoutes.findIndex(route => route.id === id);
-      if (index !== -1) {
-        mockRoutes.splice(index, 1);
-        return true;
-      }
-      throw new Error('Route not found');
-    } catch (error) {
-      console.error('Error deleting route:', error);
-      throw error;
-    }
-  },
-
-  // Optimize routes
-  optimizeRoutes: async (optimizationParams) => {
-    try {
-      // When backend is ready, replace with actual API call
-      // const response = await api.post('/routes/optimize', optimizationParams);
-      // return response.data;
-      
-      // For now, return mock data
-      return {
+      const result = {
         success: true,
-        message: 'Routes optimized successfully',
-        optimizedRoutes: mockRoutes.map(route => ({
-          ...route,
-          efficiency: Math.min(route.efficiency + 5, 100),
-        })),
+        optimizedRoutes,
+        timestamp: Date.now()
       };
+
+      routeCache.set(cacheKey, { data: result, timestamp: Date.now() });
+      return result;
     } catch (error) {
-      console.error('Error optimizing routes:', error);
-      throw error;
+      throw new Error(`Optimization failed: ${error.message}`);
     }
-  },
-}; 
+  }
+};
+
+// Single consolidated helper function
+function optimizeRouteMetrics(route, params) {
+  return {
+    efficiency: Math.min((route.efficiency || 0) + 5, 100),
+    fuelConsumption: calculateFuelMetric(route, params),
+    estimatedTime: route.duration
+  };
+}
+
+function calculateFuelMetric(route, params) {
+  return (route.distance?.split(' ')[0] || 0) * 0.1;
+}
