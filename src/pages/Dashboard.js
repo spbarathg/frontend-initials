@@ -10,6 +10,7 @@ import CostSavingsWidget from '../components/dashboard/CostSavingsWidget';
 import EmissionsImpactChart from '../components/dashboard/charts/EmissionsImpactChart';
 import PerformanceRadar from '../components/dashboard/charts/PerformanceRadar';
 import DarkModeToggle from '../components/DarkModeToggle';
+import { SparklesIcon, ShieldCheckIcon, ChartPieIcon } from '@heroicons/react/24/outline';
 
 const Map = lazy(() => import('../components/Map'));
 
@@ -95,6 +96,69 @@ const Dashboard = () => {
 
   return (
     <div className="space-y-6">
+      {/* Quick Actions */}
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-4 gap-4">
+        <button
+          onClick={() => navigate('/dashboard/ai-autopilot')}
+          className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
+        >
+          <div className="flex items-center">
+            <div className="p-2 bg-purple-100 dark:bg-purple-900/30 rounded-lg">
+              <SparklesIcon className="w-6 h-6 text-purple-600 dark:text-purple-400" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">AI Autopilot</p>
+              <p className="text-xs text-purple-600 dark:text-purple-400 mt-1">Configure AI settings</p>
+            </div>
+          </div>
+        </button>
+
+        <button
+          onClick={() => navigate('/dashboard/sustainability')}
+          className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
+        >
+          <div className="flex items-center">
+            <div className="p-2 bg-green-100 dark:bg-green-900/30 rounded-lg">
+              <SparklesIcon className="w-6 h-6 text-green-600 dark:text-green-400" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Sustainability Hub</p>
+              <p className="text-xs text-green-600 dark:text-green-400 mt-1">View sustainability metrics</p>
+            </div>
+          </div>
+        </button>
+
+        <button
+          onClick={() => navigate('/dashboard/risk-radar')}
+          className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
+        >
+          <div className="flex items-center">
+            <div className="p-2 bg-red-100 dark:bg-red-900/30 rounded-lg">
+              <ShieldCheckIcon className="w-6 h-6 text-red-600 dark:text-red-400" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">Risk Radar</p>
+              <p className="text-xs text-red-600 dark:text-red-400 mt-1">Monitor risks</p>
+            </div>
+          </div>
+        </button>
+
+        <button
+          onClick={() => navigate('/dashboard/ai-decisions')}
+          className="bg-white dark:bg-gray-800 rounded-xl border border-gray-200 dark:border-gray-700 p-4 shadow-sm hover:shadow-md transition-shadow duration-300"
+        >
+          <div className="flex items-center">
+            <div className="p-2 bg-blue-100 dark:bg-blue-900/30 rounded-lg">
+              <ChartPieIcon className="w-6 h-6 text-blue-600 dark:text-blue-400" />
+            </div>
+            <div className="ml-4">
+              <p className="text-sm font-medium text-gray-500 dark:text-gray-400">AI Decisions</p>
+              <p className="text-xs text-blue-600 dark:text-blue-400 mt-1">View AI insights</p>
+            </div>
+          </div>
+        </button>
+      </div>
+
       {/* Header */}
       <div className="flex justify-between items-center">
         <div>

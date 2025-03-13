@@ -20,6 +20,15 @@ import Inventory from './pages/dashboard/inventory/Inventory';
 import Settings from './pages/dashboard/settings/Settings';
 import Team from './pages/dashboard/team/Team';
 
+// Import new components
+import SustainabilityHub from './components/dashboard/SustainabilityHub';
+import AIAutopilotSettings from './components/dashboard/AIAutopilotSettings';
+import RiskRadar from './components/dashboard/RiskRadar';
+import AIDecisionAnalysis from './components/dashboard/AIDecisionAnalysis';
+import AIInventoryTransfers from './components/dashboard/AIInventoryTransfers';
+import AIDataCleaning from './components/dashboard/AIDataCleaning';
+import TeamPerformance from './components/dashboard/TeamPerformance';
+
 const App = () => {
   return (
     <AuthProvider>
@@ -55,6 +64,15 @@ const App = () => {
               <Route path="inventory" element={<Inventory />} />
               <Route path="team" element={<Team />} />
               <Route path="settings" element={<Settings />} />
+              
+              {/* New AI and Sustainability routes */}
+              <Route path="sustainability" element={<SustainabilityHub />} />
+              <Route path="ai-autopilot" element={<AIAutopilotSettings />} />
+              <Route path="risk-radar" element={<RiskRadar />} />
+              <Route path="ai-decisions" element={<AIDecisionAnalysis />} />
+              <Route path="ai-inventory" element={<AIInventoryTransfers />} />
+              <Route path="ai-data" element={<AIDataCleaning />} />
+              <Route path="team-performance" element={<TeamPerformance />} />
             </Route>
 
             {/* Catch all route */}
