@@ -1,26 +1,48 @@
-import React, { useState, useEffect } from 'react';
-import { Link, useLocation } from 'react-router-dom';
+import React, { useState, useEffect, useRef } from 'react';
+import { Link, useLocation, useNavigate } from 'react-router-dom';
 import Logo from './Logo';
 import { useAuth } from '../../contexts/AuthContext';
+import {
+  UserCircleIcon,
+  Cog6ToothIcon,
+  ArrowRightOnRectangleIcon,
+  ChevronDownIcon,
+  HomeIcon
+} from '@heroicons/react/24/outline';
 
 const Navbar = () => {
   const [isOpen, setIsOpen] = useState(false);
   const [isScrolled, setIsScrolled] = useState(false);
+  const [isProfileOpen, setIsProfileOpen] = useState(false);
   const { user, logout } = useAuth();
   const location = useLocation();
+  const navigate = useNavigate();
+  const dropdownRef = useRef(null);
 
   useEffect(() => {
     const handleScroll = () => {
       setIsScrolled(window.scrollY > 10);
     };
 
+    const handleClickOutside = (event) => {
+      if (dropdownRef.current && !dropdownRef.current.contains(event.target)) {
+        setIsProfileOpen(false);
+      }
+    };
+
     window.addEventListener('scroll', handleScroll);
-    return () => window.removeEventListener('scroll', handleScroll);
+    document.addEventListener('mousedown', handleClickOutside);
+    
+    return () => {
+      window.removeEventListener('scroll', handleScroll);
+      document.removeEventListener('mousedown', handleClickOutside);
+    };
   }, []);
 
   const handleLogout = async () => {
     try {
       await logout();
+      navigate('/');
     } catch (error) {
       console.error('Failed to log out:', error);
     }
@@ -31,6 +53,17 @@ const Navbar = () => {
     { name: 'Features', path: '/features' },
     { name: 'About', path: '/about' },
     { name: 'Contact', path: '/contact' },
+  ];
+
+  const profileMenuItems = [
+    { name: 'Dashboard', icon: HomeIcon, path: '/dashboard' },
+    { name: 'Settings', icon: Cog6ToothIcon, path: '/dashboard/settings' },
+    { 
+      name: 'Logout', 
+      icon: ArrowRightOnRectangleIcon, 
+      onClick: handleLogout,
+      className: 'text-red-600 hover:bg-red-50 dark:text-red-400 dark:hover:bg-red-900/10'
+    }
   ];
 
   const isActivePath = (path) => {
@@ -69,12 +102,47 @@ const Navbar = () => {
               </Link>
             ))}
             {user ? (
-              <button
-                onClick={handleLogout}
-                className="text-gray-300 hover:text-white transition-all duration-200 tracking-wide transform hover:scale-105"
-              >
-                Logout
-              </button>
+              <div className="relative" ref={dropdownRef}>
+                <button
+                  onClick={() => setIsProfileOpen(!isProfileOpen)}
+                  className="flex items-center space-x-2 text-gray-300 hover:text-white transition-all duration-200"
+                >
+                  <UserCircleIcon className="h-6 w-6" />
+                  <ChevronDownIcon className={`h-4 w-4 transition-transform duration-200 ${isProfileOpen ? 'rotate-180' : ''}`} />
+                </button>
+
+                {/* Dropdown Menu */}
+                <div className={`absolute right-0 mt-2 w-48 rounded-lg bg-white dark:bg-gray-800 shadow-lg ring-1 ring-black ring-opacity-5 transition-all duration-200 transform origin-top-right
+                  ${isProfileOpen 
+                    ? 'opacity-100 scale-100 translate-y-0' 
+                    : 'opacity-0 scale-95 -translate-y-2 pointer-events-none'}`}
+                >
+                  <div className="py-1">
+                    {profileMenuItems.map((item) => (
+                      item.onClick ? (
+                        <button
+                          key={item.name}
+                          onClick={item.onClick}
+                          className={`w-full flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50 ${item.className || ''}`}
+                        >
+                          <item.icon className="h-5 w-5 mr-3" />
+                          {item.name}
+                        </button>
+                      ) : (
+                        <Link
+                          key={item.name}
+                          to={item.path}
+                          className="flex items-center px-4 py-2 text-sm text-gray-700 dark:text-gray-300 hover:bg-gray-100 dark:hover:bg-gray-700/50"
+                          onClick={() => setIsProfileOpen(false)}
+                        >
+                          <item.icon className="h-5 w-5 mr-3" />
+                          {item.name}
+                        </Link>
+                      )
+                    ))}
+                  </div>
+                </div>
+              </div>
             ) : (
               <Link
                 to="/login"
@@ -123,15 +191,31 @@ const Navbar = () => {
             </Link>
           ))}
           {user ? (
-            <button
-              onClick={() => {
-                handleLogout();
-                setIsOpen(false);
-              }}
-              className="w-full text-left px-3 py-2 rounded-md text-base text-gray-300 hover:text-white hover:bg-gray-700/30 tracking-wide transition-all duration-200"
-            >
-              Logout
-            </button>
+            <>
+              <Link
+                to="/dashboard"
+                className="block px-3 py-2 rounded-md text-base text-gray-300 hover:text-white hover:bg-gray-700/30 tracking-wide transition-all duration-200"
+                onClick={() => setIsOpen(false)}
+              >
+                Dashboard
+              </Link>
+              <Link
+                to="/dashboard/settings"
+                className="block px-3 py-2 rounded-md text-base text-gray-300 hover:text-white hover:bg-gray-700/30 tracking-wide transition-all duration-200"
+                onClick={() => setIsOpen(false)}
+              >
+                Settings
+              </Link>
+              <button
+                onClick={() => {
+                  handleLogout();
+                  setIsOpen(false);
+                }}
+                className="w-full text-left px-3 py-2 rounded-md text-base text-red-500 hover:text-red-400 hover:bg-gray-700/30 tracking-wide transition-all duration-200"
+              >
+                Logout
+              </button>
+            </>
           ) : (
             <Link
               to="/login"

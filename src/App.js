@@ -11,12 +11,14 @@ import Layout from './components/layout/Layout';
 import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
-import DashboardWithDarkMode from './components/dashboardwithdarkmode';
 import Dashboard from './pages/Dashboard';
 import ImportData from './pages/dashboard/import/ImportData';
 import Features from './pages/Features';
 import About from './pages/About';
 import Contact from './pages/Contact';
+import Inventory from './pages/dashboard/inventory/Inventory';
+import Settings from './pages/dashboard/settings/Settings';
+import Team from './pages/dashboard/team/Team';
 
 const App = () => {
   return (
@@ -43,25 +45,17 @@ const App = () => {
             {/* Protected dashboard routes */}
             <Route path="/dashboard" element={
               <ProtectedRoute>
-                <Layout>
-                  <DashboardWithDarkMode />
-                </Layout>
+                <Layout />
               </ProtectedRoute>
             }>
               <Route index element={<Dashboard />} />
               <Route path="routes" element={<RoutesPage />} />
               <Route path="analytics" element={<Analytics />} />
-              <Route path="import" element={<ImportData />} /> {/* Move this inside the dashboard routes */}
+              <Route path="import" element={<ImportData />} />
+              <Route path="inventory" element={<Inventory />} />
+              <Route path="team" element={<Team />} />
+              <Route path="settings" element={<Settings />} />
             </Route>
-
-            {/* Admin routes */}
-            <Route path="/admin/*" element={
-              <ProtectedRoute requireAdmin>
-                <Layout>
-                  <div>Admin Dashboard (Coming Soon)</div>
-                </Layout>
-              </ProtectedRoute>
-            } />
 
             {/* Catch all route */}
             <Route path="*" element={<Navigate to="/" replace />} />
