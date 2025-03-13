@@ -1,6 +1,7 @@
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import Navbar from '../components/common/Navbar';
+import Hero from '../components/Hero';
 import '../styles/ScrollTransition.css';
 
 const FeatureCard = ({ icon: Icon, title, description }) => (
@@ -78,55 +79,8 @@ const LandingPage = () => {
   return (
     <div className="min-h-screen bg-[#121212] text-white font-roboto">
       <Navbar />
+      <Hero />
       
-      {/* Hero Section */}
-      <section className="relative min-h-screen flex items-center justify-center overflow-hidden">
-        {/* Animated Background */}
-        <div className="absolute inset-0 z-0 overflow-hidden">
-          {/* Gradient Orbs */}
-          <div className="absolute -top-1/2 -left-1/4 w-[800px] h-[800px] bg-blue-600/40 rounded-full mix-blend-normal filter blur-[80px] animate-blob opacity-70" />
-          <div className="absolute top-1/4 -right-1/4 w-[800px] h-[800px] bg-purple-600/40 rounded-full mix-blend-normal filter blur-[80px] animate-blob animation-delay-2000 opacity-70" />
-          <div className="absolute -bottom-1/4 left-1/3 w-[800px] h-[800px] bg-indigo-600/40 rounded-full mix-blend-normal filter blur-[80px] animate-blob animation-delay-4000 opacity-70" />
-          
-          {/* Gradient Overlay */}
-          <div className="absolute inset-0 bg-gradient-to-b from-[#121212]/0 via-[#121212]/20 to-[#121212] z-10" />
-        </div>
-
-        {/* Content */}
-        <div className="relative z-20 container mx-auto px-4 text-center">
-          <h1 className="font-montserrat text-6xl sm:text-7xl lg:text-8xl font-bold mb-8 tracking-tight animate-fade-in">
-            Sustainable Future
-          </h1>
-          <p className="text-xl sm:text-2xl text-gray-300 mb-12 animate-slide-up font-montserrat tracking-wide max-w-2xl mx-auto">
-            Optimizing logistics for a better tomorrow
-          </p>
-          <div className="animate-slide-up">
-            <Link
-              to="/signup"
-              className="group px-8 py-3 bg-white/10 backdrop-blur-sm border border-white/20 rounded-full text-white hover:bg-white/20 transition-all duration-300 transform hover:scale-105 inline-flex items-center font-montserrat"
-            >
-              Get Started
-              <span className="inline-block ml-2 transition-transform duration-200 group-hover:translate-x-1">→</span>
-            </Link>
-          </div>
-        </div>
-
-        {/* Scroll Indicator */}
-        <div className="absolute bottom-8 left-1/2 transform -translate-x-1/2 animate-bounce">
-          <svg
-            className="w-6 h-6 text-white/50"
-            fill="none"
-            strokeLinecap="round"
-            strokeLinejoin="round"
-            strokeWidth="2"
-            viewBox="0 0 24 24"
-            stroke="currentColor"
-          >
-            <path d="M19 14l-7 7m0 0l-7-7m7 7V3"></path>
-          </svg>
-        </div>
-      </section>
-
       {/* Content Section */}
       <section className="scroll-section content-section py-32">
         <div className="max-w-6xl mx-auto px-4 sm:px-6 lg:px-8">
