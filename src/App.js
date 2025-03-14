@@ -12,7 +12,7 @@ import ProtectedRoute from './components/ProtectedRoute';
 import { AuthProvider } from './contexts/AuthContext';
 import { ThemeProvider } from './contexts/ThemeContext';
 import Dashboard from './pages/Dashboard';
-import ImportData from './pages/dashboard/import/ImportData';
+import ImportPage from './pages/ImportPage';
 import Features from './pages/Features';
 import About from './pages/About';
 import Contact from './pages/Contact';
@@ -22,7 +22,6 @@ import Team from './pages/dashboard/team/Team';
 
 // Import new components
 import SustainabilityHub from './components/dashboard/SustainabilityHub';
-import AIAutopilotSettings from './components/dashboard/AIAutopilotSettings';
 import RiskRadar from './components/dashboard/RiskRadar';
 import AIDecisionAnalysis from './components/dashboard/AIDecisionAnalysis';
 import AIInventoryTransfers from './components/dashboard/AIInventoryTransfers';
@@ -60,14 +59,13 @@ const App = () => {
               <Route index element={<Dashboard />} />
               <Route path="routes" element={<RoutesPage />} />
               <Route path="analytics" element={<Analytics />} />
-              <Route path="import" element={<ImportData />} />
+              <Route path="import" element={<ImportPage />} />
               <Route path="inventory" element={<Inventory />} />
               <Route path="team" element={<Team />} />
               <Route path="settings" element={<Settings />} />
               
               {/* New AI and Sustainability routes */}
               <Route path="sustainability" element={<SustainabilityHub />} />
-              <Route path="ai-autopilot" element={<AIAutopilotSettings />} />
               <Route path="risk-radar" element={<RiskRadar />} />
               <Route path="ai-decisions" element={<AIDecisionAnalysis />} />
               <Route path="ai-inventory" element={<AIInventoryTransfers />} />
