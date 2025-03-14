@@ -2,42 +2,26 @@ import React from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import {
   HomeIcon,
-  TruckIcon,
-  ChartBarIcon,
-  CogIcon,
-  UserGroupIcon,
-  ArrowUpTrayIcon,
   CubeIcon,
-  SparklesIcon,
-  ShieldCheckIcon,
-  ChartPieIcon,
+  ArrowUpTrayIcon,
+  CogIcon,
+  ChartBarIcon,
   ArrowPathIcon,
-  DocumentCheckIcon,
-  TrophyIcon,
+  TruckIcon,
 } from '@heroicons/react/24/outline';
 import Logo from '../common/Logo';
 
 const navigation = [
   { name: 'Dashboard', href: '/dashboard', icon: HomeIcon },
-  { name: 'Routes', href: '/dashboard/routes', icon: TruckIcon },
-  { name: 'Analytics', href: '/dashboard/analytics', icon: ChartBarIcon },
   { name: 'Inventory', href: '/dashboard/inventory', icon: CubeIcon },
   { name: 'Import Data', href: '/dashboard/import', icon: ArrowUpTrayIcon },
-  { name: 'Team', href: '/dashboard/team', icon: UserGroupIcon },
   { name: 'Settings', href: '/dashboard/settings', icon: CogIcon },
 ];
 
 const aiFeatures = [
-  { name: 'AI Autopilot', href: '/dashboard/ai-autopilot', icon: SparklesIcon },
-  { name: 'Risk Radar', href: '/dashboard/risk-radar', icon: ShieldCheckIcon },
-  { name: 'AI Decisions', href: '/dashboard/ai-decisions', icon: ChartPieIcon },
-  { name: 'AI Inventory', href: '/dashboard/ai-inventory', icon: ArrowPathIcon },
-  { name: 'AI Data', href: '/dashboard/ai-data', icon: DocumentCheckIcon },
-];
-
-const sustainabilityFeatures = [
-  { name: 'Sustainability Hub', href: '/dashboard/sustainability', icon: SparklesIcon },
-  { name: 'Team Performance', href: '/dashboard/team-performance', icon: TrophyIcon },
+  { name: 'Inventory Optimization', href: '/dashboard/inventory-optimization', icon: ChartBarIcon },
+  { name: 'Dynamic Rerouting', href: '/dashboard/dynamic-rerouting', icon: ArrowPathIcon },
+  { name: 'Last Mile Delivery', href: '/dashboard/last-mile-delivery', icon: TruckIcon },
 ];
 
 const Sidebar = () => {
@@ -84,20 +68,10 @@ const Sidebar = () => {
         {/* AI Features Section */}
         <div className="mt-8">
           <h3 className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-            AI Features
+            AI & Optimization
           </h3>
           <div className="mt-3">
             {renderNavItems(aiFeatures)}
-          </div>
-        </div>
-
-        {/* Sustainability Features Section */}
-        <div className="mt-8">
-          <h3 className="px-3 text-xs font-semibold text-gray-500 dark:text-gray-400 uppercase tracking-wider">
-            Sustainability
-          </h3>
-          <div className="mt-3">
-            {renderNavItems(sustainabilityFeatures)}
           </div>
         </div>
       </nav>

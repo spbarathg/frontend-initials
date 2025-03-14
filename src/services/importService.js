@@ -7,7 +7,7 @@ const validateDataTypes = (data) => {
     if (row.quantity && isNaN(Number(row.quantity))) {
       errors.push(`Row ${index + 1}: Quantity must be a number`);
     }
-    if (row.plannedDate && !isValidDate(row.plannedDate)) {
+    if (row.expiry_date && !isValidDate(row.expiry_date)) {
       errors.push(`Row ${index + 1}: Invalid date format`);
     }
   });
@@ -26,7 +26,7 @@ export const validateData = async (data) => {
       throw new Error(JSON.stringify(validationErrors));
     }
     
-    const response = await api.post('/api/validate-data', data);
+    const response = await api.post('/api/datasource/validate/', data);
     return response.data;
   } catch (error) {
     if (error.response) {
@@ -53,7 +53,7 @@ export const processImport = async (data, source, onProgress) => {
     
     for (let i = 0; i < data.length; i += batchSize) {
       const batch = data.slice(i, i + batchSize);
-      await api.post('/api/import-data', { data: batch, source });
+      await api.post('/api/datasource/import/', { data: batch, source });
       
       if (onProgress) {
         const progress = Math.round(((i + batchSize) / data.length) * 100);
@@ -73,33 +73,27 @@ export const getFieldMappingTemplate = (source) => {
       'product_id': 'productId',
       'quantity': 'quantity',
       'location': 'location',
-      'date_planned': 'plannedDate',
+      'expiry_date': 'expiryDate',
     },
     zoho: {
       'item_id': 'productId',
       'stock_level': 'quantity',
       'warehouse': 'location',
-      'expected_date': 'plannedDate',
+      'expiry_date': 'expiryDate',
     },
-    sap: {
-      'material_number': 'productId',
-      'stock_qty': 'quantity',
-      'storage_loc': 'location',
-      'req_date': 'plannedDate',
-    },
-    netsuite: {
-      'item_number': 'productId',
-      'on_hand': 'quantity',
-      'bin_location': 'location',
-      'delivery_date': 'plannedDate',
-    },
+    csv: {
+      'product_id': 'productId',
+      'quantity': 'quantity',
+      'location': 'location',
+      'expiry_date': 'expiryDate',
+    }
   };
   return templates[source] || {};
 };
 
 export const validateApiCredentials = async (source, credentials) => {
   try {
-    const response = await api.post('/api/validate-credentials', { source, credentials });
+    const response = await api.post('/api/datasource/validate-credentials/', { source, credentials });
     return response.data;
   } catch (error) {
     throw new Error('API validation failed: ' + error.message);
@@ -109,7 +103,7 @@ export const validateApiCredentials = async (source, credentials) => {
 export const downloadTemplate = (source) => {
   const templates = {
     csv: [
-      'product_id,quantity,location,planned_date',
+      'product_id,quantity,location,expiry_date',
       'PROD001,100,Warehouse A,2025-04-01',
       'PROD002,50,Warehouse B,2025-04-02',
     ].join('\n'),

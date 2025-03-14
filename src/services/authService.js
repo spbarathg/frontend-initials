@@ -1,40 +1,14 @@
-// Mock data for development
-const mockUsers = [
-  {
-    id: 1,
-    email: 'admin@example.com',
-    password: 'admin123',
-    role: 'admin',
-    name: 'Admin User'
-  },
-  {
-    id: 2,
-    email: 'user@example.com',
-    password: 'user123',
-    role: 'user',
-    name: 'Regular User'
-  }
-];
+import api from './api';
 
 // Service functions
 export const authService = {
   // Login user
   login: async (email, password) => {
     try {
-      // When backend is ready, replace with actual API call
-      // const response = await api.post('/auth/login', { email, password });
-      // const { user, token } = response.data;
-      
-      // For now, use mock data
-      const user = mockUsers.find(u => u.email === email && u.password === password);
-      if (!user) {
-        throw new Error('Invalid credentials');
-      }
-
-      const token = 'mock-jwt-token';
+      const response = await api.post('/api/login/', { email, password });
+      const { user, token } = response.data;
       localStorage.setItem('token', token);
       localStorage.setItem('user', JSON.stringify(user));
-
       return { user, token };
     } catch (error) {
       console.error('Login error:', error);
@@ -65,21 +39,11 @@ export const authService = {
     return user?.role === 'admin';
   },
 
-  // Register new user (admin only)
-  registerUser: async (userData) => {
+  // Register new user
+  register: async (userData) => {
     try {
-      // When backend is ready, replace with actual API call
-      // const response = await api.post('/auth/register', userData);
-      // return response.data;
-      
-      // For now, handle mock data
-      const newUser = {
-        id: mockUsers.length + 1,
-        ...userData,
-        role: 'user'
-      };
-      mockUsers.push(newUser);
-      return newUser;
+      const response = await api.post('/api/register/', userData);
+      return response.data;
     } catch (error) {
       console.error('Registration error:', error);
       throw error;

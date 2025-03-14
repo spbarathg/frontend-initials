@@ -1,230 +1,223 @@
-# 🌍 Sustainable Logistics Optimization Platform
+# 🚀 Logistics AI Optimization Platform
 
-[![Made with Love](https://img.shields.io/badge/Made%20with-Love-red.svg)](https://github.com/yourusername/logistics-optimizer)
-[![Sustainability](https://img.shields.io/badge/Sustainability-Focused-brightgreen.svg)](https://github.com/yourusername/logistics-optimizer)
 [![AI Powered](https://img.shields.io/badge/AI-Powered-blue.svg)](https://github.com/yourusername/logistics-optimizer)
 [![Integration Ready](https://img.shields.io/badge/Integration-Ready-success.svg)](https://github.com/yourusername/logistics-optimizer)
-[![Documentation](https://img.shields.io/badge/docs-up%20to%20date-brightgreen.svg)](https://github.com/yourusername/logistics-optimizer)
-[![License](https://img.shields.io/badge/License-MIT-yellow.svg)](https://opensource.org/licenses/MIT)
-[![PRs Welcome](https://img.shields.io/badge/PRs-welcome-brightgreen.svg)](http://makeapullrequest.com)
+[![Python](https://img.shields.io/badge/Backend-Python%20Flask-green.svg)](https://github.com/yourusername/logistics-optimizer)
+[![React](https://img.shields.io/badge/Frontend-React-blue.svg)](https://github.com/yourusername/logistics-optimizer)
 
 <div align="center">
-  <h3>🚀 Next-Generation Logistics Optimization Platform</h3>
-  <p><em>Revolutionizing supply chain management through AI-powered sustainability solutions</em></p>
+  <h3>Next-Generation Logistics Management Platform</h3>
+  <p><em>Empowering logistics operations with AI-driven optimization and intelligent inventory management</em></p>
 </div>
 
 ## 📚 Table of Contents
 - [Overview](#-overview)
-- [Key Features](#-key-features)
-- [System Architecture](#-system-architecture)
+- [Features](#-features)
+- [Pages & Components](#-pages--components)
 - [Technical Stack](#-technical-stack)
 - [Getting Started](#-getting-started)
 - [API Documentation](#-api-documentation)
-- [Performance](#-performance)
-- [Security](#-security)
-- [Contributing](#-contributing)
-- [Support](#-support)
-- [License](#-license)
 
 ## 🌟 Overview
 
-The Sustainable Logistics Optimization Platform is an enterprise-grade solution that seamlessly integrates artificial intelligence with sustainable logistics practices. Our platform offers:
+The Logistics AI Optimization Platform is a comprehensive solution that integrates artificial intelligence with modern logistics management. Our platform focuses on three core areas:
+- Multi-platform data integration
+- AI-powered inventory management
+- Dynamic rerouting capabilities
 
-- **Real-time Optimization**: Advanced algorithms for route planning
-- **Sustainability Metrics**: Comprehensive carbon footprint tracking
-- **Enterprise Integration**: Ready-to-use APIs and webhooks
-- **Scalable Architecture**: Cloud-native design principles
+## 🎯 Features
 
-## 🎯 Key Features
+### 1. User Authentication & Onboarding
+- Secure user registration and login
+- Business profile setup
+- Supply chain unit selection
+- Data source integration setup
 
-### 🤖 AI-Powered Route Optimization
+### 2. Data Source Integration
+- One-click integration with:
+  - Zoho Inventory
+  - Odoo ERP
+  - CSV file upload
+- Automated data mapping
+- Historical data processing
+- Real-time synchronization
 
-```mermaid
-graph TD
-    A[Route Engine] -->|Input| B[Data Processing]
-    B --> C[AI Model]
-    C --> D[Route Generation]
-    D --> E[Optimization]
-    E -->|Output| F[Final Route]
-    
-    B -->|Feeds| G[Historical Data]
-    G -->|Improves| C
-    
-    H[Real-time Traffic] -->|Updates| E
-    I[Weather Data] -->|Influences| E
-```
+### 3. AI-Powered Inventory Management
+- **Demand Forecasting**
+  - Trend-based analysis
+  - Seasonal pattern recognition
+  - ML-powered predictions
+  
+- **Dynamic Docking**
+  - Retailer-to-retailer transfer optimization
+  - Automated stock balancing
+  - Real-time transfer suggestions
+  
+- **Monitoring & Optimization**
+  - Low stock alerts
+  - Expiry date tracking
+  - Restock recommendations
+  - Performance analytics
 
-#### Capabilities
-- **Intelligent Route Planning**
-  - Multi-vehicle optimization
-  - Real-time traffic integration
-  - Weather-aware routing
-  - Dynamic rerouting
-  - Fuel efficiency optimization
+### 4. Dynamic Rerouting
+- AI-assisted plan generation using Gemini API
+- Disruption handling for:
+  - Natural disasters
+  - Technical issues
+  - Resource unavailability
+- Location-based rerouting
+- Real-time plan adjustments
 
-### 📦 Advanced Inventory Management
+### 5. Last Mile Delivery (Future Implementation)
+- IAFSA-based optimization
+- Route efficiency analysis
+- Delivery time optimization
 
-```mermaid
-graph TB
-    A[Inventory Control] -->|Monitors| B[Stock Levels]
-    A -->|Tracks| C[Orders]
-    A -->|Manages| D[Warehouses]
-    
-    B -->|Triggers| E[Auto-Reorder]
-    C -->|Updates| F[Analytics]
-    D -->|Optimizes| G[Distribution]
-    
-    E --> H[Supply Chain]
-    F --> H
-    G --> H
-```
+## 📱 Pages & Components
 
-#### Features
-- **Smart Inventory Control**
-  - ML-powered demand forecasting
-  - Automated reorder points
-  - Multi-warehouse management
-  - Real-time stock synchronization
+### Public Pages
+1. **Landing Page** (`/`)
+   - Platform introduction
+   - Feature highlights
+   - Call-to-action buttons
 
-## 🏗️ System Architecture
+2. **Authentication**
+   - Login Page (`/login`)
+   - Sign Up Page (`/signup`)
+   - Form validation
+   - Secure token management
 
-### Microservices Architecture
+3. **Onboarding** (`/onboarding`)
+   - Step-by-step setup wizard
+   - Business profile configuration
+   - Supply chain unit selection
+   - Data source connection
 
-```mermaid
-graph LR
-    A[Client Apps] -->|API Gateway| B[Load Balancer]
-    B --> C[Auth Service]
-    B --> D[Route Service]
-    B --> E[Inventory Service]
-    B --> F[Analytics Service]
-    
-    C --> G[User DB]
-    D --> H[Route DB]
-    E --> I[Inventory DB]
-    F --> J[Analytics DB]
-```
+### Dashboard Pages
+1. **Main Dashboard** (`/dashboard`)
+   - Overview metrics
+   - Quick actions
+   - Recent activities
+   - Performance indicators
 
-### Tech Stack Details
-- **Frontend**
-  - React 18.x
-  - TypeScript 4.x
-  - Tailwind CSS 3.x
-  - Redux Toolkit
-  - React Query
+2. **Inventory Management** (`/dashboard/inventory`)
+   - Current stock levels
+   - Stock movement history
+   - Location-wise inventory
+   - Alert notifications
 
-- **Backend**
-  - Node.js 16.x
-  - Express.js
-  - MongoDB
-  - Redis Cache
-  - Docker
+3. **Import Data** (`/dashboard/import`)
+   - Data source selection
+   - File upload interface
+   - Mapping configuration
+   - Import status tracking
+
+4. **Settings** (`/dashboard/settings`)
+   - User preferences
+   - System configuration
+   - Integration settings
+   - Notification preferences
+
+### AI Features
+1. **Inventory Optimization** (`/dashboard/inventory-optimization`)
+   - Demand Forecasting tab
+   - Dynamic Docking tab
+   - Monitoring & Alerts tab
+   - Interactive optimization controls
+
+2. **Dynamic Rerouting** (`/dashboard/dynamic-rerouting`)
+   - Disruption type selection
+   - Unit and location specification
+   - AI-generated rerouting plans
+   - Plan visualization
+
+3. **Last Mile Delivery** (`/dashboard/last-mile-delivery`)
+   - IAFSA optimization interface
+   - Route planning tools
+   - Delivery scheduling
+   - Performance tracking
+
+## 🛠 Technical Stack
+
+### Frontend
+- React.js
+- TailwindCSS
+- React Router
+- Context API
+- Axios
+
+### Backend
+- Python Flask
+- Google Cloud Platform
+  - Vertex AI
+  - Cloud Functions/Cloud Run
+  - Cloud Storage
+- JWT Authentication
+
+### AI/ML
+- Google Gemini API
+- Linear Regression (Forecasting)
+- Rule-based Systems
+- IAFSA Implementation (Future)
 
 ## 🚀 Getting Started
 
-### System Requirements
-- **Development Environment**
-  ```bash
-  Node.js >= 14.x
-  npm >= 6.x
-  Docker >= 20.x
-  MongoDB >= 5.x
-  ```
+### Prerequisites
+```bash
+Node.js >= 14.x
+Python >= 3.8
+```
 
-### Quick Start
+### Installation
 ```bash
 # Clone repository
 git clone https://github.com/yourusername/logistics-optimizer.git
 
-# Install dependencies
+# Install frontend dependencies
 cd logistics-optimizer
 npm install
 
-# Configure environment
-cp .env.example .env
-# Edit .env with your settings
+# Install backend dependencies
+cd backend
+pip install -r requirements.txt
 
-# Start development server
+# Start development servers
+# Frontend
 npm run dev
 
-# Run tests
-npm test
+# Backend
+python app.py
 ```
 
 ## 📚 API Documentation
 
-### REST Endpoints
-| Endpoint | Method | Description |
-|----------|--------|-------------|
-| `/api/routes` | GET | Fetch optimized routes |
-| `/api/inventory` | GET | Get inventory status |
-| `/api/analytics` | GET | Retrieve analytics data |
+### Authentication Endpoints
+```
+POST /api/register/
+POST /api/login/
+```
 
-### WebSocket Events
-| Event | Description |
-|-------|-------------|
-| `route.update` | Real-time route updates |
-| `inventory.change` | Stock level changes |
-| `system.alert` | System notifications |
+### Data Integration
+```
+POST /api/datasource/connect/
+POST /api/datasource/validate/
+POST /api/datasource/import/
+```
 
-## 🔒 Security
+### Inventory Management
+```
+GET  /api/inventory/current/
+POST /api/inventory/optimize/
+```
 
-### Implementation
-- JWT Authentication
-- Role-based access control
-- Rate limiting
-- Request validation
-- Data encryption
-- Security headers
-- CORS policy
-
-### Best Practices
-- Regular security audits
-- Dependency scanning
-- Code signing
-- Secure sessions
-- Input sanitization
-
-## 📊 Performance Metrics
-
-### System Benchmarks
-| Component | Metric | Target | Current |
-|-----------|--------|--------|---------|
-| Route Optimization | Processing Time | < 2s | 1.8s |
-| Map Rendering | Initial Load | < 1s | 0.8s |
-| API Response | Latency | < 100ms | 85ms |
-| Database Queries | Response Time | < 50ms | 45ms |
-
-### Optimization Results
-| Metric | Improvement |
-|--------|-------------|
-| Route Efficiency | 35-40% |
-| Fuel Consumption | 25-30% |
-| Delivery Time | 20-25% |
-| Carbon Footprint | 30-35% |
-
-## 🤝 Contributing
-
-We welcome contributions! Please see our [Contributing Guidelines](CONTRIBUTING.md) for details.
-
-### Development Process
-1. Fork the repository
-2. Create your feature branch
-3. Commit your changes
-4. Push to the branch
-5. Create a Pull Request
-
-## 💁 Support
-
-- 📧 Email: support@logisticsplatform.com
-- 💬 Discord: [Join our community](https://discord.gg/logistics)
-- 📖 Documentation: [Read the docs](https://docs.logisticsplatform.com)
-
-## 📄 License
-
-This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
+### AI Features
+```
+POST /api/rerouting/dynamic/
+GET  /api/lastmile/optimize/
+```
 
 ---
 
 <div align="center">
-  <p>Built with ❤️ for a sustainable future</p>
+  <p>Built for next-generation logistics optimization</p>
 </div>

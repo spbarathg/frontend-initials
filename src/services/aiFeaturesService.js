@@ -33,7 +33,27 @@ export const connectDataSource = async (params) => {
 // Supply Chain Unit Selection
 export const updateSupplyChainUnits = async (params) => {
   try {
-    const response = await api.post('/api/onboarding/supply-chain-units/', params);
+    const response = await api.post('/api/onboarding/', params);
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Get Current Inventory
+export const getCurrentInventory = async (params) => {
+  try {
+    const response = await api.get('/api/inventory/current/', { params });
+    return response.data;
+  } catch (error) {
+    throw error;
+  }
+};
+
+// Last Mile Delivery Optimization (Placeholder)
+export const optimizeLastMileDelivery = async () => {
+  try {
+    const response = await api.get('/api/lastmile/optimize/');
     return response.data;
   } catch (error) {
     throw error;
